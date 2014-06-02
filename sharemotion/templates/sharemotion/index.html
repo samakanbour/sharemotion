@@ -1,0 +1,66 @@
+{% load staticfiles %}
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>sharEmotion</title>
+		<link rel="shortcut icon" href="{% static "sharemotion/img/home.png" %}">
+		<link  href="{% static "sharemotion/css/style.css" %}" rel="stylesheet" type="text/css"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="{% static "sharemotion/js/raphael.js" %}" 	type="text/javascript"></script>
+		<script src="{% static "sharemotion/js/graph.js" %}" 	type="text/javascript"></script>
+		<script src="{% static "sharemotion/js/script.js" %}" 	type="text/javascript"></script>
+		<script src="{% static "sharemotion/js/twitter.js" %}" 	type="text/javascript"></script>
+		<link rel="stylesheet" href="http://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css" />
+		<script src="http://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+	</head>
+	<body>
+
+	<div id="content">
+		<div id="holder"></div>
+		<div id="time">
+			<span id="happy"></span>
+			<span id="sad"></span>
+			<span id="angry"></span>
+			<span id="love"></span>
+			<span id="fear"></span>
+		</div>
+
+		<header>
+			<button type="button" id="mute"></button>
+			{% if user.name %}
+				<a href="/sharemotion/signin"><button type="button" id="signout">Sign out</button></a>
+				<img id="profile" src="{{user.url}}"/>
+				<div id="name">{{user.name}}</div>
+			{% else %}
+				<a href="/sharemotion/signin"><button type="button" id="twittersign"></button></a>
+			{% endif %}
+		</header>
+
+	</div>
+
+	<div id="emotion">
+		<div class='tweets' id='happytweets'></div>
+		<div class='tweets' id='sadtweets'></div>
+		<div class='tweets' id='angrytweets'></div>
+		<div class='tweets' id='lovetweets'></div>
+		<div class='tweets' id='feartweets'></div>
+		{% if user.name %}
+			<input type="text" id="comment" placeholder="Write a comment...">
+			<button type="button" id="post"></button>
+		{% else %}
+			<div>Sign in to post your mood.</div>
+		{% endif %}
+		<div id="errormessage"></div>
+		<div id="feeling"></div>
+	</div>
+
+	<audio controls id='aud0' src="{% static "sharemotion/sounds/j.mp3" %}" controls></audio>   
+	<audio controls id='aud1' src="{% static "sharemotion/sounds/s.mp3" %}" controls></audio>
+	<audio controls id='aud2' src="{% static "sharemotion/sounds/a.mp3" %}" controls></audio>
+	<audio controls id='aud3' src="{% static "sharemotion/sounds/l.mp3" %}" controls></audio>
+	<audio controls id='aud4' src="{% static "sharemotion/sounds/f.mp3" %}" controls></audio>
+
+	</body>
+</html>
